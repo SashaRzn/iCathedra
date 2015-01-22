@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database Name="Database" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Table Name="Course">
+    <Type Name="Course">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Speciality" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="EmployeeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="DimplomSettings_CourseDiplom" Member="DiplomSettings" ThisKey="ID" OtherKey="DiplomCourseId" Type="DiplomSettings" DeleteRule="NO ACTION" />
+      <Association Name="DiplomSettings_CourseCons" Member="DiplomSettings_CourseCons" ThisKey="ID" OtherKey="ConsCourseId" Type="DiplomSettings" DeleteRule="NO ACTION" />
+      <Association Name="FK_Course_Employee" Member="Employee" ThisKey="EmployeeID" OtherKey="Id" Type="Employee" IsForeignKey="true" />
+      <Association Name="FK_CourseInWork_Course" Member="CourseInWork" ThisKey="ID" OtherKey="CourseID" Type="CourseInWork" DeleteRule="NO ACTION" />
+    </Type>
+  </Table>
+  <Table Name="CourseInWork">
+    <Type Name="CourseInWork">
+      <Column Name="CourseID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Group1ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Group2ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SchoolYearID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Semestr" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="EmployeeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LectHours" Type="System.Decimal" DbType="Decimal(5,2)" CanBeNull="true" />
+      <Column Name="KonsHours" Type="System.Decimal" DbType="Decimal(5,2)" CanBeNull="true" />
+      <Column Name="ZachHours" Type="System.Decimal" DbType="Decimal(5,2)" CanBeNull="true" />
+      <Column Name="EkzHours" Type="System.Decimal" DbType="Decimal(5,2)" CanBeNull="true" />
+      <Column Name="IzHours" Type="System.Decimal" DbType="Decimal(5,2)" CanBeNull="true" />
+      <Column Name="UprHours" Type="System.Decimal" DbType="Decimal(5,2)" CanBeNull="true" />
+      <Column Name="LabHours" Type="System.Decimal" DbType="Decimal(5,2)" CanBeNull="true" />
+      <Column Name="KontrRabHours" Type="System.Decimal" DbType="Decimal(5,2)" CanBeNull="true" />
+      <Column Name="KrHours" Type="System.Decimal" DbType="Decimal(5,2)" CanBeNull="true" />
+      <Column Name="KpHours" Type="System.Decimal" DbType="Decimal(5,2)" CanBeNull="true" />
+      <Column Name="Fact" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="Room" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ProchHours" Type="System.Decimal" DbType="Decimal(5,2)" CanBeNull="true" />
+      <Column Name="Group3ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Group4ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TwinID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="FK_CourseInWork_Course" Member="Course" ThisKey="CourseID" OtherKey="ID" Type="Course" IsForeignKey="true" />
+      <Association Name="FK_CourseInWork_CourseInWork" Member="Twin" ThisKey="TwinID" OtherKey="ID" Type="CourseInWork" IsForeignKey="true" />
+      <Association Name="FK_CourseInWork_CourseInWork" Member="CourseInWork_CourseInWork" ThisKey="ID" OtherKey="TwinID" Type="CourseInWork" DeleteRule="NO ACTION" />
+      <Association Name="FK_CourseInWork_Employee" Member="Employee" ThisKey="EmployeeID" OtherKey="Id" Type="Employee" IsForeignKey="true" />
+      <Association Name="FK_CourseInWork_Group1" Member="Group" ThisKey="Group1ID" OtherKey="ID" Type="Group" IsForeignKey="true" />
+      <Association Name="FK_CourseInWork_Group2" Member="Group2" ThisKey="Group2ID" OtherKey="ID" Type="Group" IsForeignKey="true" />
+      <Association Name="FK_CourseInWork_SchoolYear" Member="SchoolYear" ThisKey="SchoolYearID" OtherKey="ID" Type="SchoolYear" IsForeignKey="true" />
+      <Association Name="FK_CoursInWork_Group3" Member="Group3" ThisKey="Group3ID" OtherKey="ID" Type="Group" IsForeignKey="true" />
+      <Association Name="FK_CoursInWork_Group4" Member="Group4" ThisKey="Group4ID" OtherKey="ID" Type="Group" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="DiplomSettings">
+    <Type Name="DiplomSettings">
+      <Column Name="DiplomCourseId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CourseName" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="ConsCourseId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DiplomHoursPerStudent" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ConsHoursPerStudent" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Association Name="DimplomSettings_CourseDiplom" Member="Course" ThisKey="DiplomCourseId" OtherKey="ID" Type="Course" IsForeignKey="true" />
+      <Association Name="DiplomSettings_CourseCons" Member="ConsCourse" ThisKey="ConsCourseId" OtherKey="ID" Type="Course" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="Employee">
+    <Type Name="Employee">
+      <Column Name="Fio" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="PostID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NonActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Phone" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="E-mail" Member="E_Mail" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Association Name="FK_Course_Employee" Member="Course" ThisKey="Id" OtherKey="EmployeeID" Type="Course" DeleteRule="NO ACTION" />
+      <Association Name="FK_CourseInWork_Employee" Member="CourseInWork" ThisKey="Id" OtherKey="EmployeeID" Type="CourseInWork" DeleteRule="NO ACTION" />
+      <Association Name="FK_Employee_Post" Member="Post" ThisKey="PostID" OtherKey="Id" Type="Post" IsForeignKey="true" />
+      <Association Name="FK_Rate_Employee" Member="Rate" ThisKey="Id" OtherKey="EmployeeID" Type="Rate" DeleteRule="NO ACTION" />
+    </Type>
+  </Table>
+  <Table Name="Group">
+    <Type Name="Group">
+      <Column Name="Group" Member="Group1" Type="System.String" DbType="NVarChar(4) NOT NULL" CanBeNull="false" />
+      <Column Name="Speciality" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="SpecialityName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IsOchniki" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="FK_CourseInWork_Group1" Member="CourseInWork" ThisKey="ID" OtherKey="Group1ID" Type="CourseInWork" DeleteRule="NO ACTION" />
+      <Association Name="FK_CourseInWork_Group2" Member="CourseInWork_Group2" ThisKey="ID" OtherKey="Group2ID" Type="CourseInWork" DeleteRule="NO ACTION" />
+      <Association Name="FK_CoursInWork_Group3" Member="CoursInWork_Group3" ThisKey="ID" OtherKey="Group3ID" Type="CourseInWork" DeleteRule="NO ACTION" />
+      <Association Name="FK_CoursInWork_Group4" Member="CoursInWork_Group4" ThisKey="ID" OtherKey="Group4ID" Type="CourseInWork" DeleteRule="NO ACTION" />
+      <Association Name="FK_GroupInSemestr_Group" Member="GroupInSemestr" ThisKey="ID" OtherKey="GroupID" Type="GroupInSemestr" DeleteRule="NO ACTION" />
+    </Type>
+  </Table>
+  <Table Name="GroupInSemestr">
+    <Type Name="GroupInSemestr">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="GroupID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SchoolYear" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Semestr" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="QuantityCommercial" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="QuantityBudget" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Association Name="FK_GroupInSemestr_Group" Member="Group" ThisKey="GroupID" OtherKey="ID" Type="Group" IsForeignKey="true" />
+      <Association Name="FK_GroupInSemestr_SchoolYear" Member="SchoolYearSchoolYear" ThisKey="SchoolYear" OtherKey="ID" Type="SchoolYear" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="Post">
+    <Type Name="Post">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ShortName" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Association Name="FK_Employee_Post" Member="Employee" ThisKey="Id" OtherKey="PostID" Type="Employee" DeleteRule="NO ACTION" />
+      <Association Name="FK_PostSalary_Post" Member="PostSalary" ThisKey="Id" OtherKey="PostID" Type="PostSalary" DeleteRule="NO ACTION" />
+      <Association Name="FK_Rate_Post" Member="Rate" ThisKey="Id" OtherKey="PostID" Type="Rate" DeleteRule="NO ACTION" />
+    </Type>
+  </Table>
+  <Table Name="PostSalary">
+    <Type Name="PostSalary">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PostID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RateInHours" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="K" Type="System.Decimal" DbType="Decimal(8,7)" CanBeNull="true" />
+      <Column Name="SchoolYearID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="BaseSalary" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="PostSalary" Member="PostSalary1" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="GradeSurcharge" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="PostSurcharge" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Association Name="FK_PostSalary_Post" Member="Post" ThisKey="PostID" OtherKey="Id" Type="Post" IsForeignKey="true" />
+      <Association Name="FK_PostSalary_SchoolYear" Member="SchoolYear" ThisKey="SchoolYearID" OtherKey="ID" Type="SchoolYear" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="Rate">
+    <Type Name="Rate">
+      <Column Name="EmployeeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SchoolYearID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Rate" Member="Rate1" Type="System.Decimal" DbType="Decimal(4,3)" CanBeNull="true" />
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PostID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsTradeUnionMember" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="PochFondLimit" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="FK_Rate_Employee" Member="Employee" ThisKey="EmployeeID" OtherKey="Id" Type="Employee" IsForeignKey="true" />
+      <Association Name="FK_Rate_Post" Member="Post" ThisKey="PostID" OtherKey="Id" Type="Post" IsForeignKey="true" />
+      <Association Name="FK_Rate_SchoolYear" Member="SchoolYear" ThisKey="SchoolYearID" OtherKey="ID" Type="SchoolYear" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="SchoolYear">
+    <Type Name="SchoolYear">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Years" Type="System.String" DbType="NVarChar(9)" CanBeNull="true" />
+      <Association Name="FK_CourseInWork_SchoolYear" Member="CourseInWork" ThisKey="ID" OtherKey="SchoolYearID" Type="CourseInWork" DeleteRule="NO ACTION" />
+      <Association Name="FK_GroupInSemestr_SchoolYear" Member="GroupInSemestr" ThisKey="ID" OtherKey="SchoolYear" Type="GroupInSemestr" DeleteRule="NO ACTION" />
+      <Association Name="FK_PostSalary_SchoolYear" Member="PostSalary" ThisKey="ID" OtherKey="SchoolYearID" Type="PostSalary" DeleteRule="NO ACTION" />
+      <Association Name="FK_Rate_SchoolYear" Member="Rate" ThisKey="ID" OtherKey="SchoolYearID" Type="Rate" DeleteRule="NO ACTION" />
+    </Type>
+  </Table>
+</Database>
